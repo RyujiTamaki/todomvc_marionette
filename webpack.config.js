@@ -3,6 +3,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
     entry:  './js/TodoMVC.js',
+    target: 'node',
     output: {
         path:     __dirname + '/' + 'builds',
         filename: 'bundle.js',
@@ -26,6 +27,10 @@ module.exports = {
             {
               test:   /\.html/,
               use : ['html-loader'],
+            },
+            {
+              test:   /\.hbs/,
+              use : ['handlebars-loader'],
             }
         ],
     },

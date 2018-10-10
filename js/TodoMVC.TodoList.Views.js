@@ -3,7 +3,10 @@
 const Mn = require('backbone.marionette');
 const Backbone = require('backbone');
 const Radio = require('backbone.radio');
+const Handlebars = require('handlebars');
 const Filter = require('./TodoMVC.FilterState');
+const TempleteTodoItemView = require('../hbs/template-todoItemView.hbs');
+const TemplateTodoListView = require('../hbs/template-todoListView.hbs');
 
 'use strict';
 
@@ -18,7 +21,7 @@ const TodoView = Mn.View.extend({
 
 	tagName: 'li',
 
-	template: '#template-todoItemView',
+	template: TempleteTodoItemView,
 
 	className: function () {
 		return this.model.get('completed') ? 'completed' : 'active';
@@ -107,7 +110,7 @@ const ListViewBody = Mn.CollectionView.extend({
 // Manages List View
 module.exports.ListView = Mn.View.extend({
 
-	template: '#template-todoListView',
+	template: TemplateTodoListView,
 
 	regions: {
 		listBody: {

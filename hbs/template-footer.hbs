@@ -1,0 +1,15 @@
+<span class="todo-count">
+    <strong>{{ activeCount }}</strong> {{ activeCountLabel }}
+</span>
+<ul class="filters">
+    <li class="all">
+        <a href="#/">All</a>
+    </li>
+    <li class="active">
+        <a href="#/active">Active</a>
+    </li>
+    <li class="completed">
+        <a href="#/completed">Completed</a>
+    </li>
+</ul>
+<button class="{{#unless completedCount}} clear-completed {{else}} hidden {{/unless}}">Clear completed</button>

@@ -3,7 +3,10 @@
 const Mn = require('backbone.marionette');
 const Backbone = require('backbone');
 const Radio = require('backbone.radio');
+const Handlebars = require('handlebars');
 const Filter = require('./TodoMVC.FilterState');
+const TempleteHeader = require('../hbs/template-header.hbs');
+const TemplateFooter = require('../hbs/template-footer.hbs');
 
 'use strict';
 
@@ -24,7 +27,7 @@ module.exports.RootLayout = Mn.View.extend({
 // ------------------
 module.exports.HeaderLayout = Mn.View.extend({
 
-	template: '#template-header',
+	template: TempleteHeader,
 
 	// UI bindings create cached attributes that
 	// point to jQuery selected objects
@@ -63,7 +66,7 @@ module.exports.HeaderLayout = Mn.View.extend({
 // Layout Footer View
 // ------------------
 module.exports.FooterLayout = Mn.View.extend({
-	template: '#template-footer',
+	template: TemplateFooter,
 
 	// UI bindings create cached attributes that
 	// point to jQuery selected objects
@@ -84,12 +87,6 @@ module.exports.FooterLayout = Mn.View.extend({
 		all: 'render'
 	},
 
-	templateContext: {
-		activeCountLabel: function () {
-			return (this.activeCount === 1 ? 'item' : 'items') + ' left';
-		}
-	},
-
 	initialize: function () {
 		this.listenTo(filterChannel.request('filterState'), 'change:filter', this.updateFilterSelection, this);
 	},
@@ -97,11 +94,13 @@ module.exports.FooterLayout = Mn.View.extend({
 	serializeData: function () {
 		const active = this.collection.getActive().length;
 		const total = this.collection.length;
+		const activeCountLabel = (this.activeCount === 1 ? 'item' : 'items') + ' left';
 
 		return {
 			activeCount: active,
 			totalCount: total,
-			completedCount: total - active
+			completedCount: total - active,
+			activeCountLabel: activeCountLabel
 		};
 	},
 
